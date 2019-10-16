@@ -7,9 +7,9 @@ export default function DisplayUserInformation() {
 	return (
 		<div>
 			<h1>User Information Component</h1>
-			<p>{ user.firstName }</p>
-			<p>{ user.lastName }</p>
-			<p>{ user.age }</p>
+			<p>{ user.state.firstName }</p>
+			<p>{ user.state.lastName }</p>
+			<p>{ user.state.age }</p>
 		</div>
 	);
 }
