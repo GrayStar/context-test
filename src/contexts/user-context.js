@@ -2,7 +2,7 @@ import React, { createContext, useReducer } from 'react';
 
 const UserContext = createContext();
 
-const intialState = {
+const initialState = {
     firstName: 'John',
     lastName: 'Doe',
     age: 32,
@@ -28,7 +28,7 @@ const reducer = (state, action) => {
 }
 
 const UserProvider = (props) => {
-    const [state, dispatch] = useReducer(reducer, intialState);
+    const [state, dispatch] = useReducer(reducer, initialState);
 
     return (
         <UserContext.Provider value={{ state, dispatch }}>
