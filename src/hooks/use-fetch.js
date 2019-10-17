@@ -2,7 +2,7 @@ import fetch from 'isomorphic-fetch';
 import { useReducer } from 'react';
 require('es6-promise').polyfill();
 
-const STATUS = {
+export const STATUS = {
     FETCHING: 'FETCHING',
     SUCCESS: 'SUCCESS',
     ERROR: 'ERROR',
@@ -13,17 +13,7 @@ const initialState = {
     response: null,
 };
 
-const fetching = () => {
-    return { type: STATUS.FETCHING };
-};
-const success = (response) => {
-    return { type: STATUS.SUCCESS, response };
-};
-const error = (response) => {
-    return { type: STATUS.ERROR, response }
-};
-
-const reducer = (state = initialState, { type, response } = {}) => {
+const reducer = (state = initialState, { type, response }) => {
     switch (type) {
         case STATUS.FETCHING:
             return {
@@ -47,23 +37,29 @@ const reducer = (state = initialState, { type, response } = {}) => {
     }
 };
 
-const useApiRequest = (url, options) => {
+const useFetch = (url, options) => {
     const [state, dispatch] = useReducer(reducer, initialState);
 
     const makeRequest = async () => {
-        dispatch(fetching());
+        dispatch({ type: STATUS.FETCHING });
 
         try {
             const response = await fetch(url, options);
             const json = await response.json();
 
-            dispatch(success(json));
-        } catch(e) {
-            dispatch(error(e));
+            dispatch({
+                type: STATUS.SUCCESS,
+                response: json,
+            });
+        } catch(error) {
+             dispatch({
+                type: STATUS.ERROR,
+                response: error,
+            });
         }
     };
 
     return [state, makeRequest];
 };
 
-export default useApiRequest;
+export default useFetch;
