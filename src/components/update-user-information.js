@@ -1,48 +1,49 @@
 import React, { Component } from 'react';
-import { UserConsumer } from '../contexts/user-context';
 
 export default class UpdateUserInformation extends Component {
-	constructor(props) {
-		super(props);
+    constructor(props) {
+        super(props);
 
-		this.handleSetFirstNameButtonClick = this.handleSetFirstNameButtonClick.bind(this);
-		this.handleSetLastNameButtonClick = this.handleSetLastNameButtonClick.bind(this);
-		this.handleSetAgeButtonClick = this.handleSetAgeButtonClick.bind(this);
-	}
+        this.handleSetFirstNameButtonClick = this.handleSetFirstNameButtonClick.bind(this);
+        this.handleSetLastNameButtonClick = this.handleSetLastNameButtonClick.bind(this);
+        this.handleSetAgeButtonClick = this.handleSetAgeButtonClick.bind(this);
+    }
 
-	handleSetFirstNameButtonClick(userContext) {
-		userContext.setFirstName('Anthony');
-	}
+    handleSetFirstNameButtonClick() {
+        if (this.props.onUserFirstNameChange) {
+            this.props.onUserFirstNameChange('Anthony');
+        }
+    }
 
-	handleSetLastNameButtonClick(userContext) {
-		userContext.setLastName('Smith');
-	}
+    handleSetLastNameButtonClick() {
+        if (this.props.onUserLastNameChange) {
+            this.props.onUserLastNameChange('Smith');
+        }
+    }
 
-	handleSetAgeButtonClick(userContext) {
-		userContext.setAge(45);
-	}
+    handleSetAgeButtonClick() {
+        if (this.props.onUserAgeChange) {
+            this.props.onUserAgeChange(45);
+        }
+    }
 
-	render() {
-		return (
-			<UserConsumer>
-				{ userContext =>
-					<div>
-						<h1>Update User Information Component</h1>
+    render() {
+        return (
+            <div>
+                <h1>Update User Information Component</h1>
 
-						<button onClick={ () => this.handleSetFirstNameButtonClick(userContext) }>
-							Set First Name to Anthony
-						</button>
+                <button onClick={ this.handleSetFirstNameButtonClick }>
+                    Set First Name to Anthony
+                </button>
 
-						<button onClick={ () => this.handleSetLastNameButtonClick(userContext) }>
-							Set Last Name to Smith
-						</button>
+                <button onClick={ this.handleSetLastNameButtonClick }>
+                    Set Last Name to Smith
+                </button>
 
-						<button onClick={ () => this.handleSetAgeButtonClick(userContext) }>
-							Set Last Name to Smith
-						</button>
-					</div>
-				}
-			</UserConsumer>
-		);
-	}
+                <button onClick={ this.handleSetAgeButtonClick}>
+                    Set Last Name to Smith
+                </button>
+            </div>
+        );
+    }
 }
