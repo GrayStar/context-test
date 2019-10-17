@@ -2,24 +2,24 @@ import React, { useContext } from 'react';
 import { UserContext, USER_ACTIONS } from '../contexts/user-context';
 
 export default function UpdateUserInformation() {
-	const user = useContext(UserContext);
+	const userContext = useContext(UserContext);
 
 	const handleSetFirstNameButtonClick = () => {
-		user.dispatch({
+		userContext.dispatch({
 			type: USER_ACTIONS.SET_FIRST_NAME,
 			payload: { firstName: 'Anthony' },
 		});
 	};
 
 	const handleSetLastNameButtonClick = () => {
-		user.dispatch({
+		userContext.dispatch({
 			type: USER_ACTIONS.SET_LAST_NAME,
 			payload: { lastName: 'Smith' },
 		});
 	};
 
 	const handleSetAgeButtonClick = () => {
-		user.dispatch({
+		userContext.dispatch({
 			type: USER_ACTIONS.SET_AGE,
 			payload: { age: 45 },
 		});

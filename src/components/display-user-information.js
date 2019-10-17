@@ -2,14 +2,14 @@ import React, { useContext } from 'react';
 import { UserContext } from '../contexts/user-context';
 
 export default function DisplayUserInformation() {
-	const user = useContext(UserContext);
+	const userContext = useContext(UserContext);
 
 	return (
 		<div>
 			<h1>User Information Component</h1>
-			<p>{ user.state.firstName }</p>
-			<p>{ user.state.lastName }</p>
-			<p>{ user.state.age }</p>
+			<p>User First Name: { userContext.state.firstName }</p>
+			<p>User Last Name: { userContext.state.lastName }</p>
+			<p>User Age: { userContext.state.age }</p>
 		</div>
 	);
 }
