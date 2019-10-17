@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import DisplayUserInformation from './components/display-user-information';
 import UpdateUserInformation from './components/update-user-information';
 
-import { UserProvider } from './contexts/user-context';
-
 export default class App extends Component {
     constructor(props) {
         super(props);
@@ -44,17 +42,15 @@ export default class App extends Component {
 
     render() {
         return (
-            <UserProvider>
-                <div>
-                    <h1>App</h1>
+            <div>
+                <h1>App</h1>
 
-                    <DisplayUserInformation user={ this.state.user } />
-                    <UpdateUserInformation
-                        onUserFirstNameChange={ this.handleUserFirstNameChange }
-                        onUserLastNameChange={ this.handleUserLastNameChange }
-                        onUserAgeChange={ this.handleUserAgeChange } />
-                </div>
-            </UserProvider>
+                <DisplayUserInformation user={ this.state.user } />
+                <UpdateUserInformation
+                    onUserFirstNameChange={ this.handleUserFirstNameChange }
+                    onUserLastNameChange={ this.handleUserLastNameChange }
+                    onUserAgeChange={ this.handleUserAgeChange } />
+            </div>
         );
     }
 }
