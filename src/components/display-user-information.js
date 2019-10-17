@@ -1,15 +1,19 @@
-import React, { useContext } from 'react';
-import { UserContext } from '../contexts/user-context';
+import React, { Component } from 'react';
+import { UserConsumer } from '../contexts/user-context';
 
-export default function DisplayUserInformation() {
-	const user = useContext(UserContext);
-
-	return (
-		<div>
-			<h1>User Information Component</h1>
-			<p>{ user.firstName }</p>
-			<p>{ user.lastName }</p>
-			<p>{ user.age }</p>
-		</div>
-	);
+export default class DisplayUserInformation extends Component {
+	render() {
+		return (
+			<UserConsumer>
+				{ userContext =>
+					<div>
+						<h1>User Information Component</h1>
+						<p>{ userContext.firstName }</p>
+						<p>{ userContext.lastName }</p>
+						<p>{ userContext.age }</p>
+					</div>
+				}
+			</UserConsumer>
+		);
+	}
 }

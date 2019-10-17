@@ -1,36 +1,48 @@
-import React, { useContext } from 'react';
-import { UserContext } from '../contexts/user-context';
+import React, { Component } from 'react';
+import { UserConsumer } from '../contexts/user-context';
 
-export default function UpdateUserInformation() {
-	const user = useContext(UserContext);
+export default class UpdateUserInformation extends Component {
+	constructor(props) {
+		super(props);
 
-	const handleSetFirstNameButtonClick = () => {
-		user.setFirstName('Anthony');
+		this.handleSetFirstNameButtonClick = this.handleSetFirstNameButtonClick.bind(this);
+		this.handleSetLastNameButtonClick = this.handleSetLastNameButtonClick.bind(this);
+		this.handleSetAgeButtonClick = this.handleSetAgeButtonClick.bind(this);
 	}
 
-	const handleSetLastNameButtonClick = () => {
-		user.setLastName('Smith');
+	handleSetFirstNameButtonClick(userContext) {
+		userContext.setFirstName('Anthony');
 	}
 
-	const handleSetAgeButtonClick = () => {
-		user.setAge(45);
+	handleSetLastNameButtonClick(userContext) {
+		userContext.setLastName('Smith');
 	}
 
-	return (
-		<div>
-			<h1>Update User Information Component</h1>
+	handleSetAgeButtonClick(userContext) {
+		userContext.setAge(45);
+	}
 
-			<button onClick={ handleSetFirstNameButtonClick }>
-				Set First Name to Anthony
-			</button>
+	render() {
+		return (
+			<UserConsumer>
+				{ userContext =>
+					<div>
+						<h1>Update User Information Component</h1>
 
-			<button onClick={ handleSetLastNameButtonClick }>
-				Set Last Name to Smith
-			</button>
+						<button onClick={ () => this.handleSetFirstNameButtonClick(userContext) }>
+							Set First Name to Anthony
+						</button>
 
-			<button onClick={ handleSetAgeButtonClick }>
-				Set Last Name to Smith
-			</button>
-		</div>
-	);
+						<button onClick={ () => this.handleSetLastNameButtonClick(userContext) }>
+							Set Last Name to Smith
+						</button>
+
+						<button onClick={ () => this.handleSetAgeButtonClick(userContext) }>
+							Set Last Name to Smith
+						</button>
+					</div>
+				}
+			</UserConsumer>
+		);
+	}
 }
