@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { UserContext } from '../contexts/user-context';
 import useFetch from '../hooks/use-fetch';
 
@@ -21,6 +21,10 @@ export default function DisplayUserInformation() {
 
         return null;
     };
+
+    useEffect(() => {
+        makeRequest();
+    }, []);
 
     return (
         <div>
